@@ -1,14 +1,8 @@
-databases:
-  - name: keycloak-db
-    plan: free
-    databaseName: keycloak
-    user: keycloak
-
 services:
   - type: web
     name: keycloak
     env: docker
-    plan: standard
+    plan: free   # ⬅️ use free plan
     autoDeploy: true
     healthCheckPath: /
     envVars:
