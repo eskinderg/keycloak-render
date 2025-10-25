@@ -11,7 +11,7 @@ WORKDIR /opt/keycloak
 # Environment defaults (can be overridden by Railway)
 #ENV KC_DB=postgres
 ENV KC_HTTP_ENABLED=true
-ENV KC_PROXY=edge
+#ENV KC_PROXY=edge
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_LOG_LEVEL=INFO
 
