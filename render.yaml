@@ -1,9 +1,16 @@
+databases:
+  - name: keycloak-db
+    plan: free
+    databaseName: keycloak
+    user: keycloak
+
 services:
   - type: web
     name: keycloak
     env: docker
     plan: standard
     autoDeploy: true
+    healthCheckPath: /
     envVars:
       - key: KC_DB
         value: postgres
@@ -29,10 +36,3 @@ services:
         sync: false
       - key: KC_BOOTSTRAP_ADMIN_PASSWORD
         sync: false
-    healthCheckPath: /
-    ports:
-      - 8080
-
-databases:
-  - name: keycloak-db
-    plan: free
