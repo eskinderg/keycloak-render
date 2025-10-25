@@ -1,29 +1,23 @@
-# Base image for Keycloak
+# Base Keycloak image
 FROM quay.io/keycloak/keycloak:26.0.1
 
-# Set working directory
 WORKDIR /opt/keycloak
 
-# Copy local Keycloak config and themes if you’ve customized them
+# Optional: include custom config, themes, providers
 COPY conf/ conf/
 COPY themes/ themes/
 COPY providers/ providers/
 
-# Set environment variables for build
+# Environment defaults (can be overridden by Railway)
 ENV KC_DB=postgres
-ENV KC_DB_URL=jdbc:postgresql://db:5432/keycloak
-ENV KC_DB_USERNAME=keycloak
-ENV KC_DB_PASSWORD=keycloak
 ENV KC_HTTP_ENABLED=true
 ENV KC_PROXY=edge
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_LOG_LEVEL=INFO
 
-# Build the server image (necessary for KC >=17)
+# Build the Keycloak image
 RUN /opt/keycloak/bin/kc.sh build
 
-# Expose the HTTP port
 EXPOSE 8080
 
-# Run Keycloak
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
